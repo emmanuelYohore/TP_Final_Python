@@ -1,4 +1,6 @@
 import random
+from others import detect_cycle
+from others import clear_screen
 
 class Game:
     def __init__(self, grille=None, size=10):
@@ -24,7 +26,6 @@ class Game:
             nx, ny = (x + dx) % self.size, (y + dy) % self.size
             neighbors += self.grille[nx][ny]
         return neighbors
-    
     def next_turn(self):
         nouvelle_grille = [[0] * self.size for _ in range(self.size)]
         for x in range(self.size):
@@ -35,3 +36,5 @@ class Game:
         self.grille = nouvelle_grille
         self.turn += 1
         self.history.append(self.grille)
+        clear_screen()
+        detect_cycle(self.history, self.turn)
