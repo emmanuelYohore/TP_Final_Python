@@ -17,3 +17,10 @@ class Game:
         for ligne in self.grille:
             print(' '.join('⬜' if cellule else '⬛' for cellule in ligne))
         print(f"Tour : {self.turn}")
+
+    def count_neighbors(self, x, y):
+        neighbors = 0
+        for dx, dy in [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]:
+            nx, ny = (x + dx) % self.size, (y + dy) % self.size
+            neighbors += self.grille[nx][ny]
+        return neighbors
