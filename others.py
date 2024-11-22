@@ -7,3 +7,4 @@ def detect_cycle(history, tour_actuel):
             break
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
+
