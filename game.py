@@ -14,10 +14,36 @@ class Game:
 
     def genererate_grille(self):
         return [[random.randint(0, 1) for _ in range(self.size)] for _ in range(self.size)]
+    
+    def set_symbols_alive(self) -> str:
+       color_choice_alive = {
+           1 : "⬜" ,
+           2: "🟪",
+           3: "🟧",
+           4: "🟩",
+       }
+       
+       for a, b in color_choice_alive.items:
+           print(a,": ",b)
+       color = int(input(" Choisissez une couleur en mettant un numéro : ") )  
+       return color_choice_alive[color]
+           
+    def set_symbols_dead(self):
+       color_choice_dead = {
+           1 : "⬜" ,
+           2: "🟪",
+           3: "🟧",
+           4: "🟩",
+       }
+           
+    
+        
+        
+            
 
-    def show_grille(self):
+    def show_grille(self, color_alive, color_dead):
         for ligne in self.grille:
-            print(' '.join('⬜' if cellule else '⬛' for cellule in ligne))
+            print(' '.join(self.color_alive if cellule else self.color_dead for cellule in ligne))
         print(f"Tour : {self.turn}")
 
     def count_neighbors(self, x, y):

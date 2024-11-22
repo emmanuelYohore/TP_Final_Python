@@ -1,4 +1,6 @@
 from game import Game
+from game import set_symbols_alive
+from game import set_symbols_dead
 from others import clear_screen
 
 def main():
@@ -26,10 +28,12 @@ def main():
                 print(f"\033[91mErreur :\033[0m {e}. Veuillez entrer un nombre entier positif.")
         
     clear_screen()
+    color_alive = set_symbols_alive()
+    color_dead = set_symbols_dead()
     jeu = Game(grille, n)
     jeu.turn = turn
     while True:
-        jeu.show_grille()
+        jeu.show_grille(color_alive, color_dead)
         action = input("Appuyez sur Entrée pour le prochain tour, ou 'Q' pour quitter : ").strip().lower()
         
         
