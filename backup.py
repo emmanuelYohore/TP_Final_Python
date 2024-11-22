@@ -6,11 +6,9 @@ def save_game(grille, tour, color_alive, color_dead):
     os.makedirs(os.path.dirname(SAVE_PATH), exist_ok=True)
     try:
         with open(SAVE_PATH, "w") as fichier:
-            # Sauvegarde du tour et des couleurs
             fichier.write(f"{tour}\n")
             fichier.write(f"{color_alive}\n")
             fichier.write(f"{color_dead}\n")
-            # Sauvegarde de la grille
             for ligne in grille:
                 fichier.write("".join(str(cell) for cell in ligne) + "\n")
         print("Partie sauvegardée avec succès.")
