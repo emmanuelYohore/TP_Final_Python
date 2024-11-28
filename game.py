@@ -79,4 +79,4 @@ class Game:
         self.turn += 1
         self.history.append(self.grille)
         clear_screen()
-        detect_cycle(self.history, self.turn)
+        return detect_cycle(self.history, self.turn)
