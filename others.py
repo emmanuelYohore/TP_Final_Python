@@ -3,7 +3,7 @@ import os
 def detect_cycle(history, tour_actuel):
     for i, grille_precedente in enumerate(history[:-1]):
         if grille_precedente == history[-1]:
-            print(f"Cycle détecté! Début : Tour {i}, Cycle actuel : {tour_actuel - i} tours.")
+            print(f"\033[32mCYCLE DETECTE!\033[0m Début : Tour {i}, durée : {tour_actuel - i} tours.")
             return True
     return False
 

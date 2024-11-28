@@ -34,7 +34,7 @@ class Game:
                 return color_choice_alive[color]
             except ValueError as e:
                 clear_screen()
-                print(f"\033[91mErreur :\033[0m Numéro invalide. Veuillez choisir un numéro dans la liste.")
+                print(f"\033[91m⚠️  Erreur :\033[0m Numéro invalide. Veuillez choisir un numéro dans la liste.")
            
     def set_symbols_dead(self):
         color_choice_dead = {
@@ -54,7 +54,7 @@ class Game:
                 return color_choice_dead[color]
             except ValueError as e:
                 clear_screen()
-                print(f"\033[91mErreur :\033[0m Numéro invalide. Veuillez choisir un numéro dans la liste.")
+                print(f"\033[91m⚠️  Erreur :\033[0m Numéro invalide. Veuillez choisir un numéro dans la liste.")
     
     def show_grille(self, color_alive, color_dead):
         for ligne in self.grille:
@@ -69,14 +69,22 @@ class Game:
         return neighbors
 
     def next_turn(self):
-        nouvelle_grille = [[0] * self.size for _ in range(self.size)]
-        for x in range(self.size):
-            for y in range(self.size):
-                neighbors = self.count_neighbors(x, y)
-                if neighbors == 3 or (neighbors == 2 and self.grille[x][y] == 1):
-                    nouvelle_grille[x][y] = 1
-        self.grille = nouvelle_grille
-        self.turn += 1
-        self.history.append(self.grille)
-        clear_screen()
-        return detect_cycle(self.history, self.turn)
+        try:
+            nouvelle_grille = [[0] * self.size for _ in range(self.size)]
+            for x in range(self.size):
+                for y in range(self.size):
+                    neighbors = self.count_neighbors(x, y)
+                    if neighbors == 3 or (neighbors == 2 and self.grille[x][y] == 1):
+                        nouvelle_grille[x][y] = 1
+            self.grille = nouvelle_grille
+            self.turn += 1
+            self.history.append(self.grille)
+            clear_screen()
+            return detect_cycle(self.history, self.turn)
+        except IndexError as e:
+            clear_screen()
+            print(f"\033[91m\n⚠️  Cette erreur a été détecté:\033[0m {e}.\nEssayez d'intérrompre la partie et d'en reprendre une nouvelle\n")
+        except Exception as e:
+            clear_screen()
+            print(f"\033[91m\n⚠️  Cette erreur a été détecté:\033[0m {e}.\nEssayez d'intérrompre la partie et d'en reprendre une nouvelle\n")
+        return False
