@@ -32,12 +32,14 @@ def main():
     if choice == '1':  
         while True:
             try:
+                print("taille max = 50       /      taille min = 5")
                 n = int(input("Entrez la taille de la grille (n x n) : "))
-                if n <= 0:
+                if n <= 4 or n > 60 :
                     raise ValueError()
                 break
             except ValueError:
-                print(f"\033[91mErreur :\033[0m Veuillez entrer un nombre entier positif.")
+                clear_screen()
+                print(f"\033[91mErreur :\033[0m Veuillez entrer un nombre entier positif. la limite est de 60")
 
         jeu = Game(None, n)
         clear_screen()
